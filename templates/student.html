@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+        .student-form {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        .student-form h1 {
+            text-align: center;
+        }
+        .student-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .student-form select,
+        .student-form input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .student-form input[type="submit"] {
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="student-form">
+        <h1>Student Details</h1>
+        <form method="post">
+            <label for="student_name">Name:</label>
+            <input type="text" id="student_name" name="student_name" required><br>
+            <label for="student_age">Age:</label>
+            <input type="text" id="student_age" name="student_age" required><br>
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select><br>
+            <label for="mail">Mail:</label>
+            <input type="text" id="mail" name="mail" required><br>
+            <label for="phone_number">Ph.No:</label>
+            <input type="text" id="phone_number" name="phone_number" required><br>
+            <label for="student_course">Course:</label>
+            <input type="text" id="student_course" name="student_course" required><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <script>
+        function validateForm() {
+            var name = document.getElementById("student_name").value;
+            var age = document.getElementById("student_age").value;
+            var mail = document.getElementById("mail").value;
+            var phoneNumber = document.getElementById("phone_number").value;
+
+            if (name === "" || age === "" || mail === "" || phoneNumber === "") {
+                alert("All fields are required.");
+                return false;
+            }
+
+            if (isNaN(age) || age < 0) {
+                alert("Please enter a valid age.");
+                return false;
+            }
+
+            if (!validateEmail(mail)) {
+                alert("Invalid email address.");
+                return false;
+            }
+
+            if (!validatePhoneNumber(phoneNumber)) {
+                alert("Invalid phone number.");
+                return false;
+            }
+
+            return true; 
+        }
+
+        function validateEmail(email) {
+            var re = /\S+@\S+\.\S+/;
+            return re.test(email);
+        }
+
+        function validatePhoneNumber(phoneNumber) {
+            var re = /^[0-9]{10}$/;
+            return re.test(phoneNumber);
+        }
+    </script>
+</body>
+</html>

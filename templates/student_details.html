@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f3d5ee; 
+        }
+        .id-card {
+            border: 1px solid #f6c8ed;
+            padding: 70px;
+            width: 250px;
+            text-align: center;
+            margin: 0 auto;
+            background-color: #d2eaf5;
+        }
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .details {
+            text-align: left;
+        }
+        .details p {
+            margin: 5px 0;
+        }
+        .button-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #008cba;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 5px;
+  border: none;
+}
+
+.button-link:hover {
+  background-color: #008cba;
+}
+
+    </style>
+</head>
+<body>
+    <center>
+        <br><br><br>
+        <div class="id-card">
+            <h1>ID CARD</h1>
+            <img class="avatar" src="{{ url_for('static', filename=avatar_filename) }}" alt="Avatar">
+            <div class="details">
+                <p><strong>Name:</strong> {{ student.name }}</p>
+                <p><strong>Age:</strong> {{ student.age }}</p>
+                <p><strong>Gender:</strong> {{ student.gender }}</p>
+                <p><strong>Email:</strong> {{ student.mail }}</p>
+                <p><strong>Phone Number:</strong> {{ student.phone_number }}</p>
+                <p><strong>Course:</strong> {{ student.course }}</p>
+            </div>
+        </div>
+        <br><br>
+        <a class="button-link" href="{{ url_for('login') }}">Home</a>
+    </center>
+    <script>
+        function validateEmail(email) {
+            var re = /\S+@\S+\.\S+/;
+            return re.test(email);
+        }
+        function validatePhoneNumber(phoneNumber) {
+            var re = /^[0-9]{10}$/;
+            return re.test(phoneNumber);
+        }
+        function validateStudentDetails() {
+            var email = "{{ student.mail }}";
+            var phoneNumber = "{{ student.phone_number }}";
+            if (!validateEmail(email)) {
+                alert("Invalid email address.");
+                return false;
+            }
+            if (!validatePhoneNumber(phoneNumber)) {
+                alert("Invalid phone number.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

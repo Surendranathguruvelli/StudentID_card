@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <style>
+        .id-card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .id-card {
+            border: 1px solid #b0e0f1;
+            padding: 20px;
+            width: 300px;
+            margin: 10px;
+            background-color: #cce5f0;
+        }
+        .avatar {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .button-link {
+            display: inline-block;
+            padding: 3.5px 20px;
+            background-color: #f1f5f7;
+            color: #101010;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+        }
+        .button-link:hover {
+            background-color: #008cba;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>Admin Panel</h1>
+        <h2>Student List</h2>
+    </center>
+    <div class="id-card-container">
+        {% if students %}
+            {% for student in students %}
+                <div class="id-card">
+                    <h3>{{ student.name }}</h3>
+                    <img class="avatar" src="{{ url_for('static', filename=student.avatar_filename) }}" alt="Avatar">
+                    <p><strong>Age:</strong> {{ student.age }}</p>
+                    <p><strong>Gender:</strong> {{ student.gender }}</p>
+                    <p><strong>Email:</strong> {{ student.mail }}</p>
+                    <p><strong>Phone Number:</strong> {{ student.phone_number }}</p>
+                    <p><strong>Course:</strong> {{ student.course }}</p>
+                    <div class="action-buttons">
+                        <a class="button-link" href="{{ url_for('edit_student', student_id=student._id) }}">Edit</a>
+                        <form class="delete-form" action="{{ url_for('delete_student', student_id=student._id) }}" method="post">
+                            <button class="delete-button" type="submit">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div>
+                <h2>No Users Found!</h2>
+            </div>
+        {% endif %}
+    </div>
+    <script>
+        function editStudent(name) {
+            console.log('Edit:', name);
+        }
+
+        function deleteStudent(name) {
+            console.log('Delete:', name);
+        }
+    </script>
+</body>
+</html>
